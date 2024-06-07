@@ -1,7 +1,7 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/analytics";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getAuth,setPersistence,browserLocalPersistence } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBB6VQ3GvMFcnWuajeVfD3Uy7WTyqAWI7M",
@@ -16,5 +16,6 @@ const firebaseConfig = {
 
 const app = firebase.initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+await setPersistence(auth, browserLocalPersistence);
 export const db = getFirestore(app);
 export{firebase};

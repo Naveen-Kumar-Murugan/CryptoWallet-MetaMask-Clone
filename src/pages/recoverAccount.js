@@ -31,7 +31,7 @@ const AccountRecovery = () => {
 
     const renderAccountDetails = (account) => (
         <div className="output">
-            <p><strong>Address:</strong> <a href={`https://etherscan.io/address/${account.address}`} target="_blank" rel="noopener noreferrer">{account.address}</a></p>
+            <p><strong>Address:</strong> <a href={`https://sepolia.etherscan.io/address/${account.address}`} target="_blank" rel="noopener noreferrer">{account.address}</a></p>
             <p><strong>Private Key:</strong> {account.privateKey}</p>
         </div>
     );

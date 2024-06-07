@@ -9,7 +9,7 @@ export default function CreateAccount(){
     const [accountName,setAccountName] = useState();
     const [createdAccount, setCreatedAccount] = useState(null);
     const uid = auth.currentUser? auth.currentUser.uid : "";
-    const accounts = collection(db, "user", uid, "wallet-accounts");
+    const accounts = collection(db, "Users", uid, "wallet accounts");
     const handleChange = (e) => {
         setAccountName(e.target.value);
       };
@@ -26,6 +26,7 @@ export default function CreateAccount(){
         setCreatedAccount(account);
         const docRef = await addDoc(accounts, {
             accountName: accountName,
+            address: account.address,
             mnemonic: account.mnemonic,
             privateKey: account.privateKey,
             publicKey: publicKey,
