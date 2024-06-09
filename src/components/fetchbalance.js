@@ -8,8 +8,8 @@ import { useNetwork } from "../utils/networkcontext";
 import { networks } from '../utils/networks';
 
 const FetchBalance = () => {
-    const { network, setNetwork } = useNetwork()
-    const [selectedAddress, setSelectedAddress] = useState('');
+    const {  network,setNetwork } = useNetwork();
+    const [selectedAddress, setSelectedAddress] = useState();
     const [balance, setBalance] = useState(null);
     const [error, setError] = useState('');
 
@@ -28,16 +28,13 @@ const FetchBalance = () => {
                 setidentity(identity => [
                     ...identity,data.address
                 ]);
-                // const last = identity.length;
-                // console.log(identity[last-1]);
-                // console.log(data);
             });
         }
         getDetails();
     },[]);
     
-
     useEffect(() => {
+        
         const fetchBalance = async () => {
             if (!ethers.isAddress(selectedAddress)) {
                 setError('Invalid address');
@@ -72,11 +69,9 @@ const FetchBalance = () => {
                 onSelectAddress={setSelectedAddress}
             />
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            {balance && (
                 <p>
                     Balance: {balance} ETH
                 </p>
-            )}
         </div>
     );
 };

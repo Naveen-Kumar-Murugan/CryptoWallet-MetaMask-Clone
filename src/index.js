@@ -11,6 +11,8 @@ import Send from './pages/send';
 import SignUp from './pages/signup';
 import Main from './pages/main';
 import AccountRecovery from './pages/recoverAccount';
+import { TxnHistory } from './pages/txnhistory';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
       <BrowserRouter>
@@ -23,6 +25,7 @@ root.render(
           <Route path="login" element={<Login />} />
           <Route path="send" element={<Send />} />
           <Route path="recoveraccount" element={<AccountRecovery />} />
+          <Route path="txnhistory" element={<TxnHistory />} />
         </Routes>
       </BrowserRouter>
 );

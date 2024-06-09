@@ -3,10 +3,11 @@ import { networks } from "../utils/networks";
 import AddressDropdown from "./dropdown";
 import { useNetwork } from "../utils/networkcontext";
 
-export const Selectnetwork = ({ children }) => {
-    const { network, setNetwork } = useNetwork()
+export const Selectnetwork = () => {
+    const { network, setNetwork } = useNetwork();
     const [selectNetwork,setSelectNetwork] = useState('');
     const tempnetworks = Object.keys(networks);
+
     useEffect(()=>{
         try{
             setNetwork(selectNetwork);
@@ -14,9 +15,11 @@ export const Selectnetwork = ({ children }) => {
         catch(error){
             alert(error);
         }
-    },[selectNetwork]);
+    });
+    console.log("select network = >",network);
     return(
         <div>
+            <h4>Select network</h4>
             <AddressDropdown
                 addresses={tempnetworks}
                 selectedAddress={selectNetwork}

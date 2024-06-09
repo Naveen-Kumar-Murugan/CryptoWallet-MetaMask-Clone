@@ -17,8 +17,11 @@ export default function Main(){
             <NetworkProvider>
                 <Selectnetwork />
                 <FetchBalance />
+                <Link to="/txnhistory"><button>Transaction history</button></Link>
             </NetworkProvider>
-        </div>
+             
+            </div>
+        
         </div>
     );
 }
