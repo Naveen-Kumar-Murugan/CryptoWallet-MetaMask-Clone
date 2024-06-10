@@ -10,7 +10,7 @@ export default function Navbar(){
             uid = auth.currentUser.uid; 
         }
         else{
-            uid="Hi";
+            uid=" ";
         }
     });
     const [loginfo,setLoginfo] = useState(uid ? "Logout" : "Login");

@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { TransactionService } from '../services/transactionservice';
 import { useNetwork } from '../utils/networkcontext';
+import { useAddress } from '../utils/addresscontext';
 
-const TransactionHistory = ({ address }) => {
+const TransactionHistory = () => {
     const [transactions, setTransactions] = useState([]);
     const {network,setNetwork} = useNetwork();
+    const { address } = useAddress();
+    // const [address,setAdress] = useState(temp.address);
+    console.log(address);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 

@@ -12,10 +12,14 @@ import SignUp from './pages/signup';
 import Main from './pages/main';
 import AccountRecovery from './pages/recoverAccount';
 import { TxnHistory } from './pages/txnhistory';
+import { AddressProvider } from './utils/addresscontext';
+import { NetworkProvider } from './utils/networkcontext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-      <BrowserRouter>
+      <AddressProvider>
+        <NetworkProvider>
+        <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="main" element={<Main />}/>
@@ -28,6 +32,8 @@ root.render(
           <Route path="txnhistory" element={<TxnHistory />} />
         </Routes>
       </BrowserRouter>
+        </NetworkProvider>
+      </AddressProvider>
 );
 
 reportWebVitals();

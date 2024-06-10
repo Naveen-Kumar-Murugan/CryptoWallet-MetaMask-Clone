@@ -1,42 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import AddressDropdown from './dropdown';
-import { collection,getDocs,query } from "firebase/firestore";
-import { db } from "../congif";
-import {auth} from "../congif";
 import { useNetwork } from "../utils/networkcontext";
 import { networks } from '../utils/networks';
+import { useAddress } from '../utils/addresscontext';
 
 const FetchBalance = () => {
     const {  network,setNetwork } = useNetwork();
-    const [selectedAddress, setSelectedAddress] = useState();
+    const { address,setAddress } = useAddress();
     const [balance, setBalance] = useState(null);
     const [error, setError] = useState('');
-
-    const [identity,setidentity] = useState([])
-
-    const uid = auth.currentUser.uid;
-    const val = collection(db, "Users", uid, "wallet accounts");
-    const getVal = query(val);
-
-    useEffect(()=> {
-        const getDetails = async (e) =>{
-        const getValue = await getDocs(getVal);
-            // console.log(getValue);
-            getValue.forEach((doc) => {
-                const data = doc.data();
-                setidentity(identity => [
-                    ...identity,data.address
-                ]);
-            });
-        }
-        getDetails();
-    },[]);
     
     useEffect(() => {
         
         const fetchBalance = async () => {
-            if (!ethers.isAddress(selectedAddress)) {
+            if (!ethers.isAddress(address)) {
                 setError('Invalid address');
                 setBalance(null);
                 return;
@@ -46,7 +23,7 @@ const FetchBalance = () => {
                 setError('');
                 //ethers.getDefaultProvider();
                 const provider = new ethers.JsonRpcProvider(networks[network].rpcUrl);
-                const balance = await provider.getBalance(selectedAddress);
+                const balance = await provider.getBalance(address);
                 const balanceInEth = ethers.formatEther(balance);
                 setBalance(balanceInEth);
             } catch (err) {
@@ -55,19 +32,14 @@ const FetchBalance = () => {
             }
         };
 
-        if (selectedAddress) {
+        if (address) {
             fetchBalance();
         }
-    }, [selectedAddress,network]);
+    }, [address,network]);
 
     return (
         <div>
             <h1>Fetch Ethereum Balance</h1>
-            <AddressDropdown
-                addresses={identity}
-                selectedAddress={selectedAddress}
-                onSelectAddress={setSelectedAddress}
-            />
             {error && <p style={{ color: 'red' }}>{error}</p>}
                 <p>
                     Balance: {balance} ETH
