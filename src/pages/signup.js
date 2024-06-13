@@ -1,4 +1,4 @@
-import React , {useState} from "react"
+import React , {useState,useEffect} from "react"
 import { Link,useNavigate } from "react-router-dom";
 import {auth} from "../congif";
 import { createUserWithEmailAndPassword,onAuthStateChanged } from "firebase/auth";
@@ -21,9 +21,13 @@ export default function SignUp(){
         }));
       };
 
-      onAuthStateChanged(auth, (curretuser)=>{
-       setUser(curretuser); 
-      });
+      useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+          setUser(currentUser);
+        });
+    
+        return () => unsubscribe();
+      }, []);
 
       const submitButton = async (event) =>{
         event.preventDefault();
@@ -38,35 +42,6 @@ export default function SignUp(){
     
       return (
         <div>
-        {/* <form>
-          <input
-            type="text"
-            name="name"
-            placeholder="Username"
-            value={formData.username}
-            onChange={handleChange}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          />
-          <button type="submit" onClick={submitButton}>
-            Submit
-          </button>
-        </form> */}
-        {/* <Link to="/login"><h2>Login</h2></Link> */}
         <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <a href="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
