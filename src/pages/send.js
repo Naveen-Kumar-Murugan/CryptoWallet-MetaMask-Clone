@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react"
-import Navbar from "../components/navbar";
+import NavBar from "../components/navbar";
 import { Link } from "react-router-dom";
 import { networks } from "../utils/networks";
 import { collection,getDocs,query } from "firebase/firestore";
@@ -10,6 +10,8 @@ import TransactionComponent from "../components/sendtransaction";
 import { useNetwork } from "../utils/networkcontext";
 import { AddressProvider, useAddress } from "../utils/addresscontext";
 import { NetworkProvider } from "../utils/networkcontext";
+import GitSvg from "../assets/github.svg";
+import LinkSvg from "../assets/linkedin.svg";
 
 export default function Send(){
     const [provider, setProvider] = useState(null);
@@ -38,7 +40,6 @@ export default function Send(){
     console.log("address =>",address);
     useEffect(()=>{
         const sProvider = async()=>{
-            //const prov = new ethers.JsonRpcProvider("https://sepolia.infura.io/v3/7bdf8cedd4ac4e6c897a21f21dca6ceb");
             const prov = new ethers.JsonRpcProvider(networks[network].rpcUrl);
             setProvider(prov);
         }
@@ -46,16 +47,9 @@ export default function Send(){
     },[])
     useEffect(() => {
          const initProvider = async (privatekey,provider) => {
-        // // const provider = new ethers.JsonRpcProvider(networks[network].rpcUrl);
-        // // setProvider(provider);
-           // const prov = new ethers.JsonRpcProvider("https://sepolia.infura.io/v3/7bdf8cedd4ac4e6c897a21f21dca6ceb");
-        // // Connect to the wallet
-            //setProvider(prov);
             console.log("priv =>",privatekey);
             const wallet = new ethers.Wallet(privatekey, provider);
             const signer = wallet.connect(provider);
-            // console.log("add => ",address);
-            // const sign = provider.getSigner(address);
             setSigner(signer)
          };
          if(privatekey){
@@ -69,16 +63,12 @@ export default function Send(){
         <div>
             <NetworkProvider>
                 <AddressProvider>
-                <Navbar/>
-                <h1>send</h1>
-                <h1>Send Ethereum Transaction</h1>
+                <div className="lg:mx-72 lg:mt-24 mx-10 mt-6 border-1 h-screen shadow-2xl">
                 {provider && signer ? (
                     <TransactionComponent provider={provider} signer={signer} network={network} />
                 ) : (
                     <p>Loading provider and signer...</p>
                 )}
-                <div>
-                    <Link to="/main"><button>main</button></Link>
                 </div>
                 </AddressProvider>
             </NetworkProvider>

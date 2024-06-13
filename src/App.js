@@ -2,11 +2,15 @@ import './App.css';
 import Home from './pages/home';
 import { NetworkProvider } from './utils/networkcontext';
 
+import { ThemeProvider } from '@material-tailwind/react';
+
 function App() {
   return (
-    <div>
+    <div >
       <NetworkProvider>
-      <Home/>
+        <ThemeProvider>
+        <Home/>
+        </ThemeProvider>
       </NetworkProvider>
     </div>
   );

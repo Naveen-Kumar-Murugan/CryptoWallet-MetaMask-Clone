@@ -1,10 +1,10 @@
 import React from "react"
-import Navbar from "../components/navbar";
+import NavBar from "../components/navbar";
 
 export default function Account(){
     return(
         <div>
-            <Navbar/>
+            <NavBar/>
             <h1>Account</h1>
         </div>
     );

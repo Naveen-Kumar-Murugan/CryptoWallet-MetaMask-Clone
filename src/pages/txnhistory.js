@@ -17,7 +17,6 @@ export const TxnHistory = () =>{
             <TransactionHistory/>
             </NetworkProvider>
             </AddressProvider>
-            <Link to="/main"><button>Main</button></Link>
         </div>
     );
 }

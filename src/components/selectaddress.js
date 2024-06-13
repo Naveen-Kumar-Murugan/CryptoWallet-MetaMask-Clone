@@ -38,8 +38,7 @@ export const Selectadress = () => {
         }
     });
     return(
-        <div>
-            <h4>Select network</h4>
+        <div className="w-44">
             <AddressDropdown
                 addresses={identity}
                 selectedAddress={selectAddress}

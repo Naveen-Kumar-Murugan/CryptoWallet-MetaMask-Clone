@@ -7,9 +7,10 @@ import { useAddress } from '../utils/addresscontext';
 const FetchBalance = () => {
     const {  network,setNetwork } = useNetwork();
     const { address,setAddress } = useAddress();
-    const [balance, setBalance] = useState(null);
+    const [balance, setBalance] = useState(0.0);
     const [error, setError] = useState('');
-    
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         
         const fetchBalance = async () => {
@@ -20,6 +21,7 @@ const FetchBalance = () => {
             }
 
             try {
+                setLoading(true);
                 setError('');
                 //ethers.getDefaultProvider();
                 const provider = new ethers.JsonRpcProvider(networks[network].rpcUrl);
@@ -29,22 +31,29 @@ const FetchBalance = () => {
             } catch (err) {
                 setError('Failed to fetch balance');
                 setBalance(null);
+            } finally {
+                setLoading(false);
             }
         };
 
-        if (address) {
+        if (address || network) {
             fetchBalance();
         }
     }, [address,network]);
 
     return (
-        <div>
-            <h1>Fetch Ethereum Balance</h1>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-                <p>
-                    Balance: {balance} ETH
-                </p>
+        <div className="flex items-center justify-center h-80 bg-cyan-100">
+        <div className="p-6 w-72 bg-white rounded-lg shadow-md">
+          {loading ? (
+            <div className="text-2xl font-bold text-cyan-600">Loading...</div>
+          ) : (
+            <div>
+              <p className="text-4xl font-bold text-cyan-600">Balance</p>
+              <p className="mt-2 text-6xl font-bold text-blue-600 overflow-auto">{balance ? balance : 0.0} ETH</p>
+            </div>
+          )}
         </div>
+      </div>
     );
 };
 

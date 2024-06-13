@@ -18,8 +18,7 @@ export const Selectnetwork = () => {
     });
     console.log("select network = >",network);
     return(
-        <div>
-            <h4>Select network</h4>
+        <div className="w-32">
             <AddressDropdown
                 addresses={tempnetworks}
                 selectedAddress={selectNetwork}

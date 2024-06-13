@@ -14,9 +14,11 @@ import AccountRecovery from './pages/recoverAccount';
 import { TxnHistory } from './pages/txnhistory';
 import { AddressProvider } from './utils/addresscontext';
 import { NetworkProvider } from './utils/networkcontext';
+import { ThemeProvider } from '@material-tailwind/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+      <ThemeProvider>
       <AddressProvider>
         <NetworkProvider>
         <BrowserRouter>
@@ -34,6 +36,7 @@ root.render(
       </BrowserRouter>
         </NetworkProvider>
       </AddressProvider>
+      </ThemeProvider>
 );
 
 reportWebVitals();
