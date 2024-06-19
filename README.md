@@ -2,18 +2,14 @@
 
 Welcome to **CryptoWallet - MetaMask Clone**, a robust and intuitive cryptocurrency wallet application inspired by MetaMask. This project enables users to manage their digital assets seamlessly, ensuring security and ease of use for all your cryptocurrency transactions and account management needs.
 
-![CryptoWallet Banner](path-to-your-image/banner.png)
-
 ## 🌟 Features
 
 ### 1. Create Account
 Easily create a new cryptocurrency account and start managing your digital assets securely with just a few clicks.
-![Create Account Screenshot](path-to-your-image/create-account.png)
 <img width="720" alt="Create Account" src="https://github.com/Naveen-Kumar-Murugan/CryptoWallet-MetaMask-Clone/assets/75003335/7e882d19-1ff3-4cdc-a66b-55ca47b96594">
 
 ### 2. Recover Account
 Lost access to your account? No worries! Recover your account swiftly using your secret recovery phrase.
-![Recover Account Screenshot](path-to-your-image/recover-account.png)
 <img width="720" alt="Recover Account" src="https://github.com/Naveen-Kumar-Murugan/CryptoWallet-MetaMask-Clone/assets/75003335/802f6c39-2c0c-410d-ae94-c6ba15093fc1">
 
 ### 3. Send Transactions
